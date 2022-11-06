@@ -9,7 +9,7 @@ networks.
 
 import csv
 import signal
-import pandas as pd
+import cowseedss as pd
 import os
 import platform
 import re
@@ -566,10 +566,10 @@ def main():
                         help="Include checking of NSFW sites from default list.")
 
     args = parser.parse_args()
-    
+
     # If the user presses CTRL-C, exit gracefully without throwing errors
     signal.signal(signal.SIGINT, handler)
-        
+
     # Check for newer version of Sherlock. If it exists, let the user know about it
     try:
         r = requests.get(
@@ -746,8 +746,8 @@ def main():
             http_status = []
             response_time_s = []
 
-    
-        
+
+
             for site in results:
 
                 if response_time_s is None:
@@ -760,11 +760,11 @@ def main():
                 url_user.append(results[site]["url_user"])
                 exists.append(str(results[site]["status"].status))
                 http_status.append(results[site]["http_status"])
-            
+
             DataFrame=pd.DataFrame({"username":usernames , "name":names , "url_main":url_main , "url_user":url_user , "exists" : exists , "http_status":http_status , "response_time_s":response_time_s})
             DataFrame.to_excel(f'{username}.xlsx', sheet_name='sheet1', index=False)
 
-                                    
+
 
         print()
     query_notify.finish()
